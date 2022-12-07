@@ -1,33 +1,39 @@
 <template>
   <div>
+    <h1 class="title">Таймер</h1>
     <form @submit.prevent>
-      <h1 class="title">Асинхронность</h1>
+      
       <input
-        v-model="input1"
+        v-model="timer1"
         class="inp"
         type="number"
         placeholder="Введите начальную задержку"
       />
       <input
-        v-model="input2"
+        v-model="timer2"
         class="inp"
         type="number"
         placeholder="Введите интервал"
       />
       <input
-        v-model="input3"
+        v-model="timer3"
         class="inp"
         type="number"
         placeholder="Введите предельное число"
       />
-      <button @click="createInput" class="btn">
-        <strong>Начать цикл</strong>
-      </button>
+      <button class="btn" @click="createTimer">Начать цикл</button>
     </form>
     <div>
-      <div><strong>Результат:</strong></div>
+      <hr class="line"/>
+      <div class="result" ><strong>Результат:</strong></div>
+      
       <ul>
-        <li v-for="number in numberArray" :key="number">
+        <li
+          class="list"
+          :style="{ backgroundColor: getRandomColor() }"
+          v-for="number in numberArray"
+          :key="number"
+        >
           {{ number }}
         </li>
       </ul>
@@ -39,17 +45,17 @@
 export default {
   data() {
     return {
-      input1: null,
-      input2: null,
-      input3: null,
+      timer1: null,
+      timer2: null,
+      timer3: null,
       inProgress: false,
       numberArray: [],
     };
   },
   methods: {
-    createInput() {
+    createTimer() {
       // console.log('pressToStart');
-      if (this.inProgress === true || this.input3 < 1) {
+      if (this.inProgress === true || this.timer3 < 1) {
         return;
       }
 
@@ -60,44 +66,88 @@ export default {
       let number = 1;
       setTimeout(() => {
         this.numberArray.push(number);
-        if (this.input3 === 1) {
+        if (this.timer3 === 1) {
           this.inProgress = false;
           return;
         }
         let interval = setInterval(() => {
           number++;
-          if (number >= this.input3) {
+          if (number >= this.timer3) {
             clearInterval(interval);
             this.inProgress = false;
           }
           this.numberArray.push(number);
-        }, this.input2);
-      }, this.input1);
+        }, this.timer2);
+      }, this.timer1);
+    },
+    getRandomColor() {
+      const colors = ["#46211A", "#693D3D", "#BA5536", "#A43820", "#AF4425"];
+      const index = Math.floor(Math.random() * colors.length);
+      return colors[index];
     },
   },
 };
 </script>
 
 <style lang="scss">
+
 .title {
   text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
 .inp {
+  width: 18%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: flex;
   margin: auto;
   margin-top: 10px;
-  text-align: center;
+  text-align:left;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px gray;
+
 }
 
 .btn {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: flex;
+  color: #ebdcb2;
+  background: #af4425;
+  border: 2px solid black;
+  border-radius: 5px;
   margin: auto;
   margin-top: 10px;
-  :hover {
-    background: red;
+  box-shadow: 3px 3px 3px gray;
+  transition: 0.5s
+}
+ .btn:hover {
+    background: #d3603d;
+
   }
+
+  .line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+.result{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  text-align: left;
+}
+
+.list {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #ebdcb2;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 </style>
 
-//поменять input1 input2 input3 и createInput и визуя
