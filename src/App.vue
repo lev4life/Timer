@@ -104,9 +104,9 @@ export default {
   margin: auto;
   margin-top: 10px;
   text-align:left;
-  border: 2px solid black;
+  border: none;
   border-radius: 5px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 0px 0px 5px gray;
 
 }
 
@@ -115,15 +115,23 @@ export default {
   display: flex;
   color: #ebdcb2;
   background: #af4425;
-  border: 2px solid black;
+  border: none;
   border-radius: 5px;
   margin: auto;
   margin-top: 10px;
-  box-shadow: 3px 3px 3px gray;
-  transition: 0.5s
+  box-shadow: 0 0 10px gray;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+
 }
- .btn:hover {
-    background: #d3603d;
+.btn:hover {
+  background: #cd4f2d;
+
+}
+
+ .btn:active{
+    transition: 0.5s ease-in-out;
+    filter: brightness(70%);
 
   }
 
@@ -143,11 +151,11 @@ export default {
   color: #ebdcb2;
   display: inline-flex;
   justify-content: space-between;
-  align-items: center;
-  text-align: center;
+  padding: 5px;
   margin: 10px;
-  border: 2px solid black;
+  box-shadow: 0 0 10px gray;
   border-radius: 5px;
 }
+
 </style>
 
